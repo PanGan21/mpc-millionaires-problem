@@ -1,4 +1,7 @@
-def rabin_miller(n, k=40):
+import random
+
+#  Uses https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+def is_prime(n, k=40):
     if n == 2:
         return True
 
@@ -13,13 +16,15 @@ def rabin_miller(n, k=40):
     for _ in range(k):
         a = random.randrange(2, n - 1)
         x = pow(a, s, n)
+
         if x == 1 or x == n - 1:
             continue
+
         for _ in range(r - 1):
             x = pow(x, 2, n)
             if x == n - 1:
                 break
         else:
             return False
-            
+
     return True
