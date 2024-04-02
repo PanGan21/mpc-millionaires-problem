@@ -1,4 +1,5 @@
 import random
+from Crypto.Util.number import getRandomNBitInteger
 
 # generate with generator.py
 PRIMES_FILE = "primes.txt"
@@ -52,3 +53,12 @@ def is_prime(n, k=40):
             return False
 
     return True
+
+
+def gen_prime(n):
+    while True:
+        p = getRandomNBitInteger(n)
+        p |= 1  # we only want odd numbers
+        if is_prime(p):
+            return p
+        print('.', end='', flush=True)
