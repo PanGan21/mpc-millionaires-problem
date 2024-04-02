@@ -4,6 +4,8 @@ from .prime import gen_prime, modinv
 def gen_rsa_params(n=2048):
     """
     Generate RSA public and private key parameters.
+    Note this is textbook RSA which is vulnerable.
+    Use a secure RSA library instead.
 
     Args:
         n (int): The number of bits for the RSA modulus (default is 2048).
