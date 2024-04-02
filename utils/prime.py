@@ -56,9 +56,59 @@ def is_prime(n, k=40):
 
 
 def gen_prime(n):
+    """
+    Generate a prime number with n bits using a probabilistic method.
+
+    Args:
+        n (int): The number of bits for the prime number.
+
+    Returns:
+        int: A prime number with n bits.
+    """
     while True:
         p = getRandomNBitInteger(n)
         p |= 1  # we only want odd numbers
         if is_prime(p):
             return p
         print('.', end='', flush=True)
+
+
+def egcd(aa, bb):
+    """
+    Extended Euclidean Algorithm to calculate the greatest common divisor (GCD)
+    and Bezout coefficients of two integers.
+
+    Args:
+        aa (int): The first integer.
+        bb (int): The second integer.
+
+    Returns:
+        Tuple[int, int, int]: A tuple containing the GCD and Bezout coefficients (x, y).
+    """
+    lr, r = abs(aa), abs(bb)
+    x, lx, y, ly = 0, 1, 1, 0
+    while r:
+        lr, (q, r) = r, divmod(lr, r)
+        x, lx = lx - q*x, x
+        y, ly = ly - q*y, y
+    return lr, lx * (-1 if aa < 0 else 1), ly * (-1 if bb < 0 else 1)
+
+
+def modinv(a, m):
+    """
+    Modular multiplicative inverse of a modulo m.
+
+    Args:
+        a (int): The integer for which the modular inverse is to be found.
+        m (int): The modulus.
+
+    Returns:
+        int: The modular inverse of a modulo m.
+
+    Raises:
+        ValueError: If a and m are not coprime.
+    """
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise ValueError
+    return x % m
