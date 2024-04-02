@@ -12,12 +12,12 @@ def symmetric_enc(key, x):
         x (int): The integer to be encrypted.
 
     Returns:
-        tuple: A tuple containing the ciphertext bytes and the nonce.
+        tuple: A tuple containing the ciphertext bytes, the authentication tag and the nonce.
     """
-    cipher = AES.new(key, AES.MODE_CTR)
-    ciphertext = cipher.encrypt(pad(long_to_bytes(x), 16))
+    cipher = AES.new(key, AES.MODE_GCM)
+    ciphertext, tag = cipher.encrypt_and_digest(pad(long_to_bytes(x), 16))
     nonce = cipher.nonce
-    return ciphertext, nonce
+    return ciphertext, tag, nonce
 
 
 def symmetric_dec(key, ciphertext, nonce):
