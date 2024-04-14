@@ -20,7 +20,7 @@ def symmetric_enc(key, x):
     return ciphertext, tag, nonce
 
 
-def symmetric_dec(key, ciphertext, nonce):
+def symmetric_dec(key, ciphertext, tag, nonce):
     """
     Decrypt ciphertext using AES in CTR mode.
 
@@ -32,6 +32,6 @@ def symmetric_dec(key, ciphertext, nonce):
     Returns:
         int: The decrypted integer.
     """
-    cipher = AES.new(key, AES.MODE_CTR, nonce=nonce)
-    x = bytes_to_long(unpad(cipher.decrypt(ciphertext), 16))
+    cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+    x = bytes_to_long(unpad(cipher.decrypt_and_verify(ciphertext, tag), 16))
     return x
