@@ -1,5 +1,9 @@
 import random
-from Crypto.Util.number import getRandomNBitInteger
+import os
+
+from Crypto.Random.random import getrandbits
+from Crypto.Util.number import getPrime
+
 
 # generate with generator.py
 PRIMES_FILE = "primes.txt"
@@ -57,20 +61,18 @@ def is_prime(n, k=40):
 
 def gen_prime(n):
     """
-    Generate a prime number with n bits using a probabilistic method.
+    Generate a prime number quickly.
 
     Args:
         n (int): The number of bits for the prime number.
 
     Returns:
-        int: A prime number with n bits.
+        int: A prime number with approximately n bits.
+
+    Raises:
+        ValueError: If n is not a positive integer.
     """
-    while True:
-        p = getRandomNBitInteger(n)
-        p |= 1  # we only want odd numbers
-        if is_prime(p):
-            return p
-        print('.', end='', flush=True)
+    return getPrime(n, os.urandom)
 
 
 def egcd(aa, bb):
