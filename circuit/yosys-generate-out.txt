@@ -1,0 +1,7 @@
+read_verilog circuit/circuit.v
+synth
+abc -g gates
+splitnets -ports -format _
+clean_zerowidth
+clean -purge
+write_verilog -simple-lhs -noattr circuit/out.v
