@@ -28,10 +28,30 @@ In the context of MPC, the Millionaires' problem is a simple yet powerful demons
 
 Reference: [Millionaires problem](https://en.wikipedia.org/wiki/Yao%27s_Millionaires%27_problem#:~:text=The%20problem%20discusses%20two%20millionaires,without%20revealing%20their%20actual%20wealth.&text=The%20Millionaires'%20problem%20is%20an,e%2Dcommerce%20and%20data%20mining.)
 
-### POC
+## Prerequisites
+
+Clone and install requirements for the project:
+
+```
+git clone https://github.com/PanGan21/mpc-millionaires-problem.git
+cd mpc-millionaires-problem
+pip install -r requirements.txt
+```
+
+Optionally generate the output values of the circuit after installing [yosys](https://github.com/YosysHQ/yosys):
+
+```
+yosys -s ./circuit/yosys-generate-out.txt
+```
+
+## Usage
+
+Run the poc main function with:
+
+```
+python main.py
+```
+
+### Disclaimer
 
 This implementation is a Proof Of Concept of a toy implementation. Therefore **DON'T USE IN PRODUCTION**.
-
-### WIP
-
-This POC is still work in progress
